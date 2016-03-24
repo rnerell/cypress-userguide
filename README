@@ -1,0 +1,121 @@
+Palmetto Cluster User's Guide
+-----------------------------
+
+This User's Guide is based on Jekyll static page generator
+and the main body of the guide is done in markdown format.
+
+Content 
+-------
+
+1. Directory structure
+2. Modifications and building new version
+3. Adding new sections 
+4. Links
+
+
+1. Directory structure 
+===========================================================
+-+- assets/ -+- css/
+ |           +- fonts/
+ |           +- js/
+ |
+ +- _config.yml
+ |
+ +- _data/
+ |
+ +- deploy.sh 
+ |
+ +- files/
+ |
+ +- images/
+ |
+ +- _includes/ -+- owners/
+ |              +- software/
+ |              +- userguide/
+ |
+ +- index.html
+ | 
+ +- _layouts/
+ |
+ +- pages/
+ |
+ +- README
+ |
+ +- _site/
+
+
+The generated product is the directory `_site`. All other files are 
+templates and raw markdown files with the content. 
+
+Directory/File   | Description
+---------------- + -------------------------------------------------
+assets           | CSS, JS and Fonts used in the template
+_config.yml      | Jekyll config file
+_data            | Objects defining navigation on all sites
+deploy.sh        | Script for uploading the page to Clemix using rsync
+files            | Extra files avaliable for download (e.g. PBS documentation)
+images           | All images
+_includes        | Content and common parts to include 
+index.html       | Landing page
+_layouts         | Templates for pages
+pages            | All pages except index.html
+README           | This file
+_site            | Generated page 
+
+
+2. Modifications and building new version
+===========================================================
+
+Jekyll requires a modern version of Ruby which is provided with a module
+
+Modify the documentation as you wish and build the new version of the page.
+Afther that run the script `build.sh`
+
+$ ./build.sh
+
+Upload the updated version to Clemix 
+
+$ ./deploy.sh 
+
+To modify the content of any existing page look at the content of directories 
+_includes/userguide , _inludes/software and _includes/owners. All of these directories 
+contain multiple `markdown` files that correspond to each section on the final page. 
+Modify the content as you wish using the markdown syntax. 
+
+3. Adding new sections 
+===========================================================
+
+If you decide to add new section under "User's Guide", "Software Guide"
+or "Owner's Guide" you will have :
+
+a) add a markdown file with the content to appropriate directory
+under `_includes` i.e. `_includes/userguide` for new "User's Guide" section,
+`_includes/software` for new "Software Guide" section or `_includes/owners`
+for new "Owner's Guide" section.
+
+b) add an entry in appropriate file in `_data` directory (either _data/userguide.yml,
+_data/software.yml or _data/owners.yml). This entry has to look like this 
+
+- id: storage
+  path: owners/PurchaseStorage.markdown
+  mainTitle: Purchase of Palmetto Storage
+  navTitle: Purchase of storage
+
+Where "id" is a key for ScrollSpy tracker and links, "path" is a relative path
+to the new file that you are adding, "mainTitle" is the title of the new section
+that appears in the body of the page and "navTitle" is the short title in the 
+navigation panel on the left. 
+
+That should be enough. Build and upload.
+
+c) $ jekyll build
+d) $ sh deploy.sh 
+
+
+4. Links
+===========================================================
+
+http://jekyllrb.com/ - Jekyll project
+http://daringfireball.net/projects/markdown/syntax - Markdown syntax 
+http://mouapp.com/ - Mou app for OSX (markdown editor)
+

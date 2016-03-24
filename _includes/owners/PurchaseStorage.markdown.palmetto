@@ -1,0 +1,34 @@
+
+An owner of Palmetto storage resources will be granted a dedicated user group that is used to govern 
+access to the purchased storage space. An owner can request that any Clemson students, faculty, or staff 
+be added to that owner's user group for access to the purchased storage space. An owner can also setup 
+VisitorID accounts for external collaborators that will enable those external collaborators to log-in 
+to Palmetto and access the owner's purchased storage space.
+
+All data storage resources available for purchase are backed-up nightly and a copy of the data resides 
+in two locations (ITC and Clemson campus) for disaster recovery.
+
+There is a 42 day (6 week) moving backup window, which means files mistakenly deleted or overwritten can 
+be retrieved up to 42 days back from the current date.
+
+The filesystem format is [SAMQFS](https://wikis.oracle.com/display/SAMQFS), and can be purchased 
+in 1 TB chunks or 11 TB chunks. Resource ownership duration is 4 years.
+
+![Palmetto Storage]({{site.data.main.palmetto_url}}/images/ddn.sfa12k.jpg)
+
+Storage purchased in 1 TB chunks:
+
+* Price: $1,000 for 4 yrs  (current as of Jan. 27, 2014 - price and availability are subject to change)
+
+* Only accessible on the Palmetto cluster
+
+* Setup as a private directory on a shared filesystem: `/common/storage_name`  (name of length 8 characters or less)
+
+Storage purchased in 11 TB chunks:
+
+* Price: $8,000 for 4 yrs  (current as of Jan. 27, 2014 - price and availability are subject to change)
+
+* Can be NFS mounted to Clemson machines external to the Palmetto cluster
+
+* Setup as a private filesystem: `/storage_name`  (name of length 8 characters or less)
+

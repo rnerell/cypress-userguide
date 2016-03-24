@@ -1,0 +1,46 @@
+navigation:
+- id: overview
+  path: software/Overview.markdown
+  mainTitle: Palmetto Software Modules on Cypress
+  navTitle: Palmetto Modules
+- id: mapreduce
+  path: software/MapReduce.markdown
+  mainTitle: Using MapReduce on Cypress
+  navTitle: MapReduce
+- id: tez
+  path: software/Tez.markdown
+  mainTitle: Using Tez on Cypress
+  navTitle: Tez
+- id: hive
+  path: software/Hive.markdown
+  mainTitle: Using Hive on Cypress
+  navTitle: Hive
+- id: hbase
+  path: software/HBase.markdown
+  mainTitle: Using HBase on Cypress
+  navTitle: HBase
+- id: pig
+  path: software/Pig.markdown
+  mainTitle: Using Pig on Cypress
+  navTitle: Pig
+- id: sqoop
+  path: software/Sqoop.markdown
+  mainTitle: Using Sqoop on Cypress
+  navTitle: Sqoop
+- id: oozie
+  path: software/Oozie.markdown
+  mainTitle: Using Oozie on Cypress
+  navTitle: Oozie
+- id: storm
+  path: software/Storm.markdown
+  mainTitle: Using Storm on Cypress
+  navTitle: Storm
+- id: kafka
+  path: software/Kafka.markdown
+  mainTitle: Using Kafka on Cypress
+  navTitle: Kafka
+- id: spark
+  path: software/Spark.markdown
+  mainTitle: Using Spark on Cypress
+  navTitle: Spark
+

@@ -1,0 +1,175 @@
+
+Condo owners are really buying "preemption units."  Preemption units give an owner job the ability 
+to preempt general jobs if needed in order to acquire the resources needed to run and prevent the 
+owner job itself from being preempted.
+
+There are currently 3 general categories of CPU cores available on Palmetto:  flop4 cores, flop8 cores, 
+and GPU-node cores
+
+* **Flop4** cores can be thought of standard x86_64 CPU processor cores that offer a single processing 
+thread per physical core and executing 128-bit SSE2 instructions (e.g., older Intel Xeon and AMD Opteron 
+processors). Flop4 cores are available on `node0001-node1622`.
+
+* **Flop8** cores are x86_64 CPU processor cores that offer more modern execution units that double the 
+floating-point performance for vectorizable workloads by executing 256-bit AVX instructions 
+(e.g., newer Intel Xeon processors). Flop8 cores are available on `node1623-node1664`.
+
+GPU-node CPU cores offer the same compute capabilities as flop8 cores but with GPU-based accelerators 
+onboard. GPU-node CPU cores are available on `node1665-node1804`.
+
+#### Differences Between Owner Queue Types (Core Types)
+
+There are variety of different types of owner queues and an important difference to be aware of is 
+the base hardware (base compute core type) that comprises a particular owner queue.  Many owner 
+queues were established when only flop4 cores were available, and those queues were later expanded 
+to include flop8 core and/or GPU-node cores.  Thus, those owner queues are designed to offer access 
+to a choice between different core types with flop4 cores remaining as their default core type.
+
+An owner can only run on flop8 cores or GPU cores with owner privilege if she has purchased flop8 
+cores or GPU cores.  In this case, she would have a queue for each type, such as a routing queue 
+named "queue2" which routes to execution "queue_8e" (indicating that jobs running there can only 
+be assigned to flop8 nodes).  We use this suffixed naming scheme so all queues belonging to a 
+particular owner can have that owner or group's name in all of the queue names.
+
+Some newer owner queues such as "bigdata" and "iriver" have only GPU nodes assigned to their default 
+job queue.  In those cases, flop4 or flop8 cores might not be available as selectable options within 
+the owner queue -- all jobs running in those queues run exclusively on GPU-node CPU cores.
+
+#### Using flop4 vs. flop8 vs. GPU-node CPU Cores
+
+We use the flop4 core as the base "unit" size when dealing with numbers of compute cores on Palmetto.
+
+Flop8 node owners may use their preemption units for flop8 or flop4 jobs.  GPU node owners may use 
+their preemption units for either GPU, flop8, or flop4 jobs.  Owners of flop4 nodes only may use 
+their preemption units for flop4 jobs only.  Flop4 only owners wanting to use flop8 nodes will 
+have to do so as general-user jobs (i.e., the jobs must be submitted to `workq`).
+
+Let A = the number of flop4 cores an owner has purchased
+
+Let B = the number of flop8 cores an owner has purchased
+
+Let C = number of GPU node CPU cores purchased
+
+Because a GPU-node's CPU cores are worth 4 times a flop4 core, and a flop8 core is worth two times a 
+flop4 core, the number of preemption units (P) per owner is:
+
+P = A + 2B + 4C
+
+Owner queues are routing queues that route to owner execution queues. Owners that purchase GPU nodes 
+will have GPU, flop8, and flop4 execution queues.  Owners that purchase flop8 nodes will have flop8 
+and flop4 execution queues.  Owners of only flop4 nodes will have a flop4 execution queue only.
+
+The flop4 execution queue maximum number of cores in use at one time = P.
+
+The flop8 execution queue maximum number of cores in use at one time = B.
+
+The GPU execution queue maximum number of core in use at one time = C.
+
+The maximums are calculated this way so an owner can choose to "spend" all of her units in a flop4 
+queue.  She can never use more flop8 or GPU cores than what was purchased.  For example, an owner may 
+use all of her preemption units in one queue if desired, but she wouldn't be able to run jobs 
+simultaneously in her other queues until she had enough free preemption units.
+
+Jobs in GPU owner queues will run only on GPU nodes.  Jobs in flop8 owner queues will run only on 
+flop8 nodes. Jobs in flop4 owner queues will run only on flop4 nodes.  A job cannot use multiple 
+types of cores at the same time (e.g., cannot combine flop8 and flop4 cores within 1 job).
+
+Jobs that can't run due to lack of preemption units will have their start time delayed by one hour. 
+After one hour has passed, the quantity of free units is recomputed and the job will either start or 
+be delayed by one hour again.
+
+Let X = number of flop4 cores in use
+
+Let Y = number of flop8 cores in use
+
+Let Z = number of gpu node flop8 cores in use
+
+The total number of cores in use simultaneously in all of an owner's GPU, flop4, and flop8 execution 
+queues must always satisfy this equation:
+
+X + 2Y + 4Z <= P
+
+#### Owner Queues Spanning Multiple Hardware Platforms (Different Node Types)
+
+Owners who have purchased multiple node types have a queue to represent each type of node purchased. 
+One of those queues serves as a default queue that is associated with the most basic type of core 
+purchased.  Let's look at an example configuration and see how it works.  Here are the Condo Owner 
+purchases made by the "repstat" group:
+
+* 504 flop4 cores
+
+* 128 flop8 cores
+
+* 144 m2075 cores
+
+Each flop8 core is equivalent to 2 flop4 cores, and each m2075 core is equivalent to 4 flop4 cores, 
+so the total number of "units" purchased by repstat is:
+
+1\*504 + 2\*128 + 4\*144 = 1336 units
+
+To run a job on a flop4 core, jobs are submitted to the `repstat` routing queue.  Each core of each 
+job in the `repstat` queue consumes 1 unit in the corresponding `repstat_4e` execution queue.
+
+To run a job on a flop8 core, jobs are submitted to the `repstat2` queue.  Each core of each job in 
+the `repstat2` queue consumes 2 units in the corresponding `repstat_8e` execution queue.
+
+To run a job on a m2075 core, jobs are submitted to the `repstat3` queue.  Each core of each job in the 
+`repstat3` queue consumes 4 units in the corresponding `repstat_m2075e` execution queue.
+
+The key point is that at no time may the total number of units consumed exceed the number of units 
+purchased, in this case, 1336 units.
+
+The repstat group may choose to consume all 1336 units simultanously in the repstat queue (repstat_4e), 
+which is why the repstat_4e queue is allowed max of 1,336 cores (as specified in the queue definition 
+shown by the output of the `qstat -Qf repstat` command).
+
+However, if all 1336 units are being consumed by the repstat queue, then no units are available to run 
+jobs in the `repstat2` or `repstat3` queues.  In that case, any job submitted to the `repstat2` or 
+`repstat3` queues would have its start time delayed by one hour and the job would be placed in the 
+`W` state (wait state).  After one hour has elapsed, the PBS scheduler determines how many units are 
+in use, and if there are enough free units, any waiting jobs will start.
+
+Here's a specific example for the repstat group's queue:
+
+Suppose there are,
+
+* 5 16-core jobs running in the repstat3 queue (repstat_m2075e)
+
+* 1 16-core job running in the repstat2 queue (repstat_2e)
+
+* 2 8-core jobs running in the repstat queue (repstat_4e)
+
+This means (5\*16\*4) + (1\*16\*2) + (2\*8\*1) =  368 units are currently consumed.
+
+Next, 975 additional single core jobs are submitted to repstat queue.
+
+Only 968 of those single core jobs would start because only 968 units are currently available 
+(1336 - 368 = 968).  The start time for the remaining 7 single core jobs would be delayed by one 
+hour and those 7 jobs would be placed into the `W` wait state.
+
+After one hour passes, the scheduler would check if there are any free units available, and start as many 
+jobs as possible.  If there still aren't enough free units, then the job start time is again delayed by 
+one hour and the jobs that are unable to start remain in the wait state.
+
+#### The checkunits Utility
+
+As a handy reference, users can run the checkunits script to see a summary of owner queue unit 
+utilization:
+
+    [galen@user001 ~]$ checkunits
+ 
+    Owner preemption unit status as of Fri May 31 14:31:14 EDT 2013
+ 
+    Group           Total purchased         Units in use    Units free
+ 
+    aroitc          1192                    907             285
+    aquinas         128                     128             0
+    bdominy         192                     0               192
+    bigdata         6144                    2112            4032
+    bioengr         1336                    792             544
+    blouin          8                       0               8
+    catalyst        96                      0               96
+    compbio         328                     0               328
+    ...
+
+

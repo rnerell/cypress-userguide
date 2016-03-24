@@ -1,0 +1,13 @@
+navigation:
+- id: intro
+  path: checkpointing/intro.markdown
+  mainTitle: Introduction to Checkpointing
+  navTitle: Intro
+- id: c
+  path: checkpointing/c.markdown
+  mainTitle: An Example C Program
+  navTitle: C
+- id: python
+  path: checkpointing/python.markdown
+  mainTitle: An Example Python Program
+  navTitle: Python

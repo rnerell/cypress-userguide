@@ -1,0 +1,70 @@
+
+OpenCL is a parallel programming standard for heterogeneous architectures like CPUs and 
+accelerators (e.g. GPUs). It consists of a language based on C for writing kernels (functions to
+be executed on a specific device) and API to define and control the devices. 
+
+The simple OpenCL program for querring the GPU devices may look like this 
+
+{% highlight cpp %}
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <CL/opencl.h>
+
+int main() {
+
+    cl_platform_id platform;
+    cl_device_id *devices;
+    cl_uint num_gpu_devices;
+    cl_int i, err;
+
+    char name[128], version[128];
+
+    /* Platform */
+    err = clGetPlatformIDs(1, &platform, NULL);
+
+    /* Get number of GPU devices */
+    err = clGetDeviceIDs(platform, CL_DEVICE_TYPE_GPU, 1, NULL, &num_gpu_devices);
+    printf("Num GPU devices : %d \n",num_gpu_devices);
+
+    /* Get GPU info */
+    devices = (cl_device_id*) malloc(sizeof(cl_device_id) * num_gpu_devices);
+    clGetDeviceIDs(platform, CL_DEVICE_TYPE_GPU, num_gpu_devices, devices, NULL);
+
+    printf("  #             Device name             Version        \n");
+    printf("------------------------------------------------------------------------ \n");
+
+    for(i=0; i<num_gpu_devices; i++) {
+
+      err = clGetDeviceInfo(devices[i], CL_DEVICE_NAME,    sizeof(name), name, NULL);
+      err = clGetDeviceInfo(devices[i], CL_DEVICE_VERSION, sizeof(version), version, NULL);
+
+      printf(" %2d %25s %25s \n", i, name, version);
+    }
+
+    free(devices);
+    return err;
+}
+{% endhighlight %}
+
+To take advantage of OpenCL extensions and use NVIDIA GPUs one needs to load `cuda-toolkit`
+module which brings the `opencl.h` header file and OpenCL library. To compile and run the 
+above example follow the commands
+
+    $ qsub -I -l select=1:ncpus=8:ngpus=2:mem=10gb,walltime=30:00
+    ...
+    $ module load gcc/4.8.1
+    $ module load cuda-toolkit/6.0.37
+    $ gcc test_opencl.c -o test_opencl.x -lOpenCL
+    $ ./test_opencl.x 
+    Num GPU devices : 2 
+      #             Device name             Version        
+    ------------------------------------------------------------------------ 
+      0                Tesla K20m           OpenCL 1.1 CUDA 
+      1                Tesla K20m           OpenCL 1.1 CUDA 
+
+More information
+
+* OpenCL standard <http://www.khronos.org/opencl>
+

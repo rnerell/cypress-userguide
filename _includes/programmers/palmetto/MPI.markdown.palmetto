@@ -1,0 +1,71 @@
+
+Message Passing Interface (MPI) is a standardized communication protocol between
+processes running on one or many computers. The communication between different
+nodes is done using the network and its efficiency highly depends on the speed of
+that interconnection.
+
+Palmetto cluster developed over the years as a heterogeneous system with respect
+to the interconnection between nodes. There are three main parts of the cluster
+that have different type of high speed interconnection. The types of these interconnections
+are Myrinet (10Gb/s), QDR Infiniband (40Gb/s) and FDR Infiniband (56Gbit/s).
+All nodes are additionally connected with standard Ethernet network.
+
+Version  | Interconnection Support                            | Module 
+-------- | -------------------------------------------------- | ----------------------------
+OpenMPI  | Ethernet, Myrinet, Infiniband (Melanox and QLogic) | `openmpi/1.6.4`
+MPICH    | Ethernet                                           | `mpich/3.0.4-eth-intel`
+MPICH-MX | Myrinet                                            | `mpich-mx/1.4`
+MPICH2   | Myrinet                                            | `mpich2/1.4`
+MPICH2   | Ethernet                                           | `mpich2/1.4-eth`
+
+We highly recommend using OpenMPI 1.6.4 variant since it will provide a 
+universal binary file that will work on all parts of Palmetto cluster.
+
+OpenMPI package comes with compiler interface and a launching program
+
+Commands | Purpose 
+------- | --------------------------
+`mpirun` or `mpiexec` | Launching program
+`mpif90` and `mpif77` | FORTRAN 90 and 77 compilers
+`mpicc` | C compiler
+`mpic++` or `mpicxx` | C++ compiler
+
+Since the MPI is a library and not a compiler itself, it has to be used together with
+any of the compiler package that is installed on Palmetto.
+
+Consider a simple program using MPI calls 
+
+{% highlight cpp %}
+#include <iostream>
+#include <cstdlib>
+
+#include "mpi.h"
+
+using namespace std;
+
+int main(int argc, char *argv[]){
+
+  int ierr, my_id, num_procs;
+
+  ierr = MPI_Init(&argc, &argv);
+  ierr = MPI_Comm_size(MPI_COMM_WORLD, &num_procs);
+  ierr = MPI_Comm_rank(MPI_COMM_WORLD, &my_id);
+
+  cout << "Hello from : " << my_id << endl;
+
+  ierr = MPI_Finalize();
+  return EXIT_SUCCESS;
+
+}
+{% endhighlight %}
+
+This can be compiled using 
+
+    $ qsub -I -l select=10:ncpus=1:mpiprocs=1
+    ...
+    $ cd $PBS_O_WORKDIR
+    $ module load gcc/4.8.1
+    $ module load openmpi/1.6.4
+    $ mpicxx mpitest.cpp -o mpitest.x 
+    $ mpiexec -n 10 -machinefile $PBS_NODEFILE ./mpitest.x 
+

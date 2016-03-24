@@ -1,0 +1,51 @@
+
+**Error message:**
+
+    qsub: Bad UID for job execution
+
+What it means:    You're trying to submit a job from within another job (most likely an interactive session), or from a node that is not the user001 node.
+
+**Error message:**    
+
+    qsub: "-lresource=" cannot be used with...
+
+What it means:    You have a typo in your qsub command (bad syntax, you might be using some of the 
+old PBS syntax, or maybe you mixed up the `:` and `,`).
+
+**Error message:** 
+
+    mpiexec: Error: get_hosts: PBS reports fewer tasks...
+
+What it means:  You're using `/usr/bin/mpiexec`  and you should be using the mpiexec that comes with your 
+MPICH module (just use `mpiexec` instead of `/usr/bin/mpiexec`).
+
+**Error message:**
+
+    MX:node0589:recv req:req status 5:Data truncated due to undersized buffer
+    MX:node0589:Remote endpoint is closed, peer=00:60:dd:46:f2:d3
+
+What it means:   You didn't specify enough memory for your job, or you neglected to specify 
+any memory requirement.
+
+**Error message:**   
+
+    -bash: /var/spool/PBS/mom_priv/jobs/633416[2].pbs01.SC: /bin/bash^M: bad interpreter: No such file or directory`
+
+What it means:   Look carefully.  Do you see that `^M` character?  That's a hidden character inserted 
+into a job script because someone edited their script using Notepad, Wordpad, or Word on a Windows 
+system, then uploaded the file to Palmetto.  It is strongly recommended that all file editing be done 
+on Palmetto (using a text editor like `nano`, `vi`, or `vim`).  If you do run into this problem and 
+need to convert a DOS file to a UNIX file, there is a utility called `dos2unix` that will remove these 
+unwanted hidden characters.  You can run this utility in this way:  `dos2unix script.sh`  (where `script.sh` 
+is the file I want to convert)
+
+**Error message:**    
+
+    PBS: job killed: ncpus 2.8 exceeded limit 2 (burst)
+
+What it means:   You reserved a certain number of cores for your job (2 in this case), but the 
+executable you are running or some task in your job is actually using more than the number of 
+allocated cores (2.8 in this case).  This will cause your job to be terminated by the PBS system.  
+If this happens, you can use the taskset utility to set core affinity for your job's tasks and thereby 
+limit core useage.
+

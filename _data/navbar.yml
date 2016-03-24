@@ -1,0 +1,12 @@
+navigation:
+- text: Home
+  url: /index.html
+- text: "User's guide"
+  url: /pages/userguide.html
+- text: Software
+  url: /pages/software.html
+- text: "Programmer's guide"
+  url: /pages/programmers.html
+- text: "Owner's guide"
+  url: /pages/ownership/owners.html
+

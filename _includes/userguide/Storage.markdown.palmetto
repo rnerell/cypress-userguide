@@ -1,0 +1,227 @@
+
+Each user account has 100 GB of backed-up space in the /home directory, and each user can store up to 1,000,000 files there.  To see how much of your available /home directory space has been used, you can run the checkquota command:
+
+    [galen@user001 ~]$ checkquota
+    /home/galen:         33.8 Gb of 100.0 Gb; or 544,730 of 1,000,000 files
+
+
+#### The /scratch1 Filesystem
+
+The `/scratch1` filesystem is the Palmetto cluster's large, high-performance filesystem.  It is a 218 TB 
+PVFS2 filesystem divided amongst 32 PVFS2 servers, and it's intended to be used as a temporary "work" filesystem 
+for actively running jobs.  Data stored in /scratch1 is not backed-up (only the `/home` and `/common` filesystems 
+are backed-up). This filesystem is connected to Palmetto's compute nodes using a high-performance Myrinet network 
+connection, so it's much faster than ethernet.  Reading and writing to/from the `/scratch1` filesystem is generally 
+much faster than doing the same with the `/home` or `/common` filesystems. Running a job from the `/home` or `/common` 
+filesystems can degrade performance for all users, so it is recommended that all jobs use only `/scratch1` for any 
+reading or writing while those jobs are running.
+
+Every user has a directory on the `/scratch1` filesystem which is accessible only to that user, e.g. `/scratch1/galen`.
+Only that directory is accessible for reading or writing temporary files. 
+
+All computational work (active jobs, data analysis, etc.) and all reading & writing by jobs should be conducted 
+within the `/scratch1` filesystem.  That means you must move all of your input (input files, executables, 
+shared libraries, etc.) to `/scratch1` before launching your job there. All of your output must also be written 
+within the `/scratch1` filesystem.
+
+Executables & libraries provided via the module system do not need to be moved to `/scratch1` because all of those 
+software packages are installed locally on each compute node.
+
+`/scratch1` is not backed-up, so move important files to your `/home` directory when your job is finished.
+
+Also, to ensure optimal performance of the `/scratch1` PVFS2 filesystem, try keep the number of files per 
+directory to less than 1,000.
+
+
+#### Using the tar Command in /scratch1
+
+At this time, the tar command (any tarring or untarring of files/directories) can be quite slow in the `/scratch1` 
+filesystem when dealing with large files or directories. The storage team is working on a faster solution. 
+In the meantime, you can achieve better performance when tarring or untarring files/directories if you perform 
+these operations in `/local_scratch` on a compute node, or even on `user001`.
+
+Here's an example where I created a .tar file from a 53 GB directory in `/scratch1` using `/local_scratch` on a 
+compute node (in an interactive session):
+
+How big is my directory?
+
+    [galen@user001 ~]$ du -sh /scratch1/galen/output-data
+    53G     /scratch1/galen/output-data
+
+Okay, that's going to result in a 53 GB .tar file. I'll need to create my `.tar` file in `/local_scratch` on a 
+compute node.  First, I'll need to look at the hardware table to see what nodes can handle such a big file, 
+
+    [galen@user001 ~]$ cat /etc/hardware-table
+
+    PALMETTO HARDWARE TABLE      Last updated:  May 12 2015
+
+    PHASE COUNT  MAKE   MODEL    CHIP(0)                CORES  RAM(1)    /local_scratch   Interconnect         FLOP  GPUs  PHIs SSD
+     0      5    HP     DL580    Intel Xeon    7542       24   505 GB(2)    99 GB         1g, 10g, mx           4     0     0    0
+     0      1    HP     DL980    Intel Xeon    7560       64     2 TB(2)    99 GB         1g, 10g, mx           4     0     0    0
+     1    247    Dell   PE1950   Intel Xeon    E5345       8    12 GB       37 GB         1g, 10g, mx           4     0     0    0
+     2    245    Dell   PE1950   Intel Xeon    E5410       8    12 GB       37 GB         1g, 10g, mx           4     0     0    0
+     3    247    Sun    X2200    AMD   Opteron 2356        8    16 GB      193 GB         1g, 10g, mx           4     0     0    0
+     4    332    IBM    DX340    Intel Xeon    E5410       8    16 GB      111 GB         1g, 10g, mx           4     0     0    0
+     5a   383    Sun    X6250    Intel Xeon    L5420       8    32 GB       31 GB         1g, 10g, mx           4     0     0    0
+     5b     9    Sun    X4150    Intel Xeon    E5410       8    16 GB       99 GB         1g, 10g, mx           4     0     0    0
+     6     69    HP     DL165    AMD   Opteron 6176       24    48 GB      193 GB         1g, 10g, mx           4     0     0    0
+     7a    42    HP     SL230    Intel Xeon    E5-2665    16    64 GB      240 GB         1g, 56g, fdr          8     0     0    0
+     7b    12    HP     SL250s   Intel Xeon    E5-2665    16    64 GB      240 GB         1g, 56g, fdr          8     2(3)  0    0
+     8a    96    HP     SL250s   Intel Xeon    E5-2665    16    64 GB      900 GB         1g, 56g, fdr          8     2(4)  0    300 GB(7)
+     8b    32    HP     SL250s   Intel Xeon    E5-2665    16    64 GB      420 GB         1g, 56g, fdr          8     2(4)  0    0
+     8c    68    Dell   PEC6220  Intel Xeon    E5-2665    16    64 GB      350 GB         1g, 40g, qdr, 10ge    8     0     0    0
+     8d     7    Dell   PER720   Intel Xeon    E5-2665    16    64 GB      350 GB         1g, 40g, qdr, 10ge    8     2(5)  0    0
+     9     72    HP     SL250s   Intel Xeon    E5-2665    16   128 GB      420 GB         1g, 56g, fdr, 10ge    8     2(4)  0    0
+    10     80    HP     SL250s   Intel Xeon    E5-2670v2  20   128 GB      800 GB         1g, 56g, fdr, 10ge    8     2(4)  0    0
+    11a    40    HP     SL250s   Intel Xeon    E5-2670v2  20   128 GB      800 GB         1g, 56g, fdr, 10ge    8     2(6)  0    0
+    11b     4    HP     SL250s   Intel Xeon    E5-2670v2  20   128 GB      800 GB         1g, 56g, fdr, 10ge    8     0     2(8) 0
+    12     30    Lenovo NX360M5  Intel Xeon    E5-2680v3  24   128 GB      800 GB         1g, 56g, fdr, 10ge   16     2(6)  0    0
+    
+    ...
+
+
+Looks like one of those Sun nodes with AMD Opteron 2356 chips would be sufficient. I'll do this in an interactive 
+session on one of those nodes. There are many different ways to ensure that my job is assigned to a specific type 
+of node, this is just one way to do it,
+
+    [galen@user001 ~]$ qsub -I -l select=1:chip_type=2356,walltime=04:00:00
+    qsub: waiting for job 1380794.pbs01 to start
+    qsub: job 1380794.pbs01 ready
+
+    [galen@node0582 ~]$ df -h /local_scratch
+    Filesystem            Size  Used Avail Use% Mounted on
+    /dev/sda3             193G  230M  183G   1% /local_scratch
+
+Only 1% used, so I have plenty of space.
+
+    [galen@node0582 ~]$ cd /local_scratch
+    [galen@node0582 local_scratch]$ tar -cf output-data.tar -C /scratch1/galen output-data
+
+Creating this 53 GB .tar file took about 2 hours.  Now I can compress it with gzip (optional, it can take a long 
+time to compress a large file), and I can move it to another filesystem,
+
+    [galen@node0582 local_scratch]$ gzip output-data.tar
+    [galen@node0582 local_scratch]$ mv output-data.tar.gz /common/backup
+
+or I can transfer it to a remote system (note:  this may take a very long time, depending on network limitations),
+
+    [galen@node0582 local_scratch]$ scp output-data.tar.gz galen@storage.apple.com:/home/galen/tar_files
+
+Be sure to clean-up after you're finished, never leave your files in shared spaces,
+
+    [galen@node0582 local_scratch]$ rm -rf output-data.tar.gz
+
+
+
+#### The /local_scratch Filesystem
+
+This mount point on each compute node refers to the local hard drive on that compute node. The size of the local 
+hard drive varies amongst the compute nodes (see the table here).
+
+/local_scratch is an ext4 filesystem and it's available as an alternative temporary "work" filesystem for actively 
+running jobs.  Data stored in `/local_scratch` is not backed-up, and you can only access a node's `/local_scratch` 
+while you have a job actively running on that node.  For that reason, you should move (or "stage") your files to 
+`/local_scratch` at the beginning of your job, then move anything you need to save back to your `/scratch1` or 
+`/home` directory before your job is finished.
+
+`/local_scratch` is writeable by all users. PBS will create unique directory for every job on the `/local_scratch` filesystem.
+This unique directory may be accessed using enviromental variable `$TMPDIR`. `$TMPDIR` is accessible only by the owner of the
+job that created it and is deleted automatically after the job has finished or has been terminated.
+If you create other directory on `/local_scratch` don't forget to remove (delete) this directory 
+at the end of your job script, before your job ends and you no longer have access to that node.
+
+If your job terminates early, and you have files stored in `/local_scratch` that you were not able to retrieve, don't panic.  
+The files stored in `/local_scratch` is purged every 2 weeks, so there is likely still enough time either (1) start a 
+batch or interactive job on that node using the `host=node####` specification and move your files, or (2) request 
+help in retrieving your files from the Palmetto support team (send an e-mail to <ithelp@clemson.edu> with Palmetto in 
+the subject line).
+
+Here are a few simple example PBS job scripts that move files to `/local_scratch`, run their computations to produce output 
+files, then copy the output files back to my `/home` directory.  **NOTE:**  these jobs are intended to be run on only a 
+single node, since each node has its own `/local_scratch` filesystem.
+
+Example #1 (Trinity):
+
+    #!/bin/bash
+    #PBS -N fasta2q
+    #PBS -l select=1:ncpus=8:mpiprocs=8:mem=12gb:interconnect=myrinet,walltime=10:00:00
+    #PBS -j oe 
+    source /etc/profile.d/modules.sh
+    module purge
+    module add gcc/4.4
+    cd $PBS_O_WORKDIR
+    mkdir -p /local_scratch/pbs.${PBS_JOBID}
+    cp /home/galen/job1/original.fastq /local_scratch/pbs.${PBS_JOBID}
+    cp /home/galen/fastq.alignment.pl /local_scratch/pbs.${PBS_JOBID}
+    /local_scratch/pbs.${PBS_JOBID}/fastq.alignment.pl --target original.fastq --output new.fasta
+    cp /local_scratch/pbs.${PBS_JOBID}/new.fasta /home/galen/job1
+    rm -rf /local_scratch/pbs.${PBS_JOBID}/*
+
+Example #2 (ANSYS):
+
+An important "trick" I'm using here is redefining the `PBS_O_WORKDIR` variable to be the `/local_scratch` directory. 
+ANSYS is designed to perform all calculations in the `PBS_O_WORKDIR`, which would normally be some place in `/scratch1` 
+or `/home` (the location where I submitted the job), so I simply reassigned this variable to the `/local_scratch` 
+directory.  That's how I can force ANSYS to run the job in `/local_scratch`.
+
+    #!/bin/bash
+    #PBS -N ANSYSdis
+    #PBS -l select=1:ncpus=8:mpiprocs=8:mem=9gb:interconnect=myrinet,aa_r_hpc=8,walltime=2:00:00
+    #PBS -j oe
+    source /etc/profile.d/modules.sh
+    module purge
+    module add ansys/13.0
+    START_DIR=/home/intro.palmetto/examples/ansys.mpi.localscr.example
+    cd $START_DIR
+    machines=$(uniq -c $PBS_NODEFILE | awk '{print $2":"$1}' | tr '\n' :)
+    mkdir -p /local_scratch/pbs.${PBS_JOBID}
+    PBS_O_WORKDIR=/local_scratch/pbs.${PBS_JOBID}
+    cp input.txt /local_scratch/pbs.${PBS_JOBID}
+    cd /local_scratch/pbs.${PBS_JOBID}
+    ansys130 -dir $PBS_O_WORKDIR -j TOP -s read -l en-us -b -i input.txt -o output.txt -dis -machines $machines -usessh
+    cp -r * $START_DIR
+    cd $START_DIR
+    rm -rf /local_scratch/pbs.${PBS_JOBID}/*
+
+Example #3 (Gaussian g09):
+
+    #!/bin/bash
+    #PBS -N Gauss-24
+    #PBS -l select=1:ncpus=8:mem=9gb:interconnect=myrinet,walltime=10:00:00
+    cd $PBS_O_WORKDIR
+    source /etc/profile.d/modules.sh
+    module purge
+    module add gcc/4.5.1 fftw/2.1.5-double gaussian/g09
+    mkdir -p /local_scratch/pbs.${PBS_JOBID}
+    cp input.inp /local_scratch/${PBS_JOBID}
+    cd /local_scratch/pbs.${PBS_JOBID}
+    g09 input.inp > output.log
+    cp -r * $PBS_O_WORKDIR
+    cd $PBS_O_WORKDIR
+    rm -rf /local_scratch/pbs.${PBS_JOBID}/*
+
+Advanced input/output staging options are presented in the PBS Professional 12.0.1 User's Guide in the 7.6 
+Input/Output File Staging section.
+
+
+#### Clean-up After Yourself
+
+If you use `/local_scratch`,  `/tmp`,  or  `/var/tmp`, please be sure to remove (delete) your files when finished 
+so other users will also be able to use that storage space.
+
+
+#### "Owner" Filesystems
+
+Some research groups, organizations, and individuals have purchased additional backed-up storage space 
+(in `/common` or other locations).  This additional storage space functions as an expanded `/home` directory.  
+For most users with additional storage space in these locations, jobs should not be run within these locations.  
+The `/scratch1` filesystem should be used for handling storage I/O for actively running jobs.
+
+If you belong to a group which has purchased additional storage space, the output of the checkquota command will include 
+storage utilization information about your additional storage:
+
+    [gcollie@user001 ~]$ checkquota
+    /home/gcollie:       10.2 Gb of 100.0 Gb; or 53,250 of 1,000,000 files
+    /bioengr:            10.5 Tb of 14.2 Tb; or 15,848,429 of 60,000,000 files
+
+

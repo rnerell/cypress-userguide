@@ -1,0 +1,261 @@
+navigation:
+- id: phases
+  path: hardware/phases.markdown
+  mainTitle: Node Phases
+  navTitle: phases
+
+nets: &mx
+  display: Myricom Myri-10G 10 Gbps
+  link: https://www.myricom.com/products/network-adapters/10g-pcie-8a-r.html
+nets: &qdr
+  display: QLogic QDR InfiniBand 40 Gbps
+  link: #
+nets: &fdr
+  display: Mellanox FDR InfiniBand 56 Gbps
+  link: http://www.mellanox.com/page/products_dyn?product_family=142&mtag=connect_ib
+
+gpus: &m2075
+  display: "2x NVIDIA Tesla M2075"
+  link:    "http://www.techpowerup.com/gpudb/2025/tesla-m2075.html"
+gpus: &k20
+  display: "2x NVIDIA Tesla K20m GPU accelerators"
+  link:    "http://www.techpowerup.com/gpudb/2029/tesla-k20m.html"
+gpus: &k40
+  display: "2x NVIDIA Tesla K40c GPU accelerators"
+  link:    "http://www.techpowerup.com/gpudb/2505/tesla-k40c.html"
+
+purchases:
+- id: 13
+  date:
+  make: Dell
+  model: C4130
+  processor: E5-2680v3
+  memory: 128
+  interconnect: *fdr
+  ethernet: 10
+  accelerator: *k40
+  total: 24
+  sold: 10
+  rank: 118
+  tflops: 721.9
+- id: 12
+  date:
+  make:
+  model:
+  processor:
+  memory:
+  interconnect: *fdr
+  ethernet:
+  accelerator: *k40
+  total:
+  sold:
+  rank:
+  tflops:
+- id: 11b
+  date:
+  make:
+  model:
+  processor:
+  memory:
+  interconnect: *fdr
+  ethernet:
+  accelerator:
+  total:
+  sold:
+  rank:
+  tflops:
+- id: 11a
+  date:
+  make:
+  model:
+  processor:
+  memory:
+  interconnect: *fdr
+  ethernet:
+  accelerator: *k40
+  total:
+  sold:
+  rank:
+  tflops:
+- id: 10
+  date:
+  make:
+  model:
+  processor:
+  memory:
+  interconnect: *fdr
+  ethernet:
+  accelerator: *k20
+  total:
+  sold:
+  rank:
+  tflops:
+- id: 9
+  date:
+  make:
+  model:
+  processor:
+  memory:
+  interconnect: *fdr
+  ethernet:
+  accelerator: *k20
+  total:
+  sold:
+  rank:
+  tflops:
+- id: 8c
+  date:
+  make:
+  model:
+  processor:
+  memory:
+  interconnect: *qdr
+  ethernet:
+  accelerator:
+  total:
+  sold:
+  rank:
+  tflops:
+- id: 8b
+  date:
+  make:
+  model:
+  processor:
+  memory:
+  interconnect: *fdr
+  ethernet:
+  accelerator: *k20
+  total:
+  sold:
+  rank:
+  tflops:
+- id: 8a
+  date:
+  make:
+  model:
+  processor:
+  memory:
+  interconnect: *fdr
+  ethernet:
+  accelerator: *k20
+  total:
+  sold:
+  rank:
+  tflops:
+- id: 7b
+  date:
+  make:
+  model:
+  processor:
+  memory:
+  interconnect: *fdr
+  ethernet:
+  accelerator: *m2075
+  total:
+  sold:
+  rank:
+  tflops:
+- id: 7a
+  date:
+  make:
+  model:
+  processor:
+  memory:
+  interconnect: *fdr
+  ethernet:
+  accelerator:
+  total:
+  sold:
+  rank:
+  tflops:
+- id: 6
+  date:
+  make:
+  model:
+  processor:
+  memory:
+  interconnect: *mx
+  ethernet:
+  accelerator:
+  total:
+  sold:
+  rank:
+  tflops:
+- id: 5b
+  date:
+  make:
+  model:
+  processor:
+  memory:
+  interconnect: *mx
+  ethernet:
+  accelerator:
+  total:
+  sold:
+  rank:
+  tflops:
+- id: 5a
+  date:
+  make:
+  model:
+  processor:
+  memory:
+  interconnect: *mx
+  ethernet:
+  accelerator:
+  total:
+  sold:
+  rank:
+  tflops:
+- id: 4
+  date:
+  make:
+  model:
+  processor:
+  memory:
+  interconnect: *mx
+  ethernet:
+  accelerator:
+  total:
+  sold:
+  rank:
+  tflops:
+- id: 3
+  date:
+  make:
+  model:
+  processor:
+  memory:
+  interconnect: *mx
+  ethernet:
+  accelerator:
+  total:
+  sold:
+  rank:
+  tflops:
+- id: 2
+  date:
+  make:
+  model:
+  processor:
+  memory:
+  interconnect: *mx
+  ethernet:
+  accelerator:
+  total:
+  sold:
+  rank:
+  tflops:
+- id: 1
+  date:
+  make:
+  model:
+  processor:
+  memory:
+  interconnect: *mx
+  ethernet:
+  accelerator:
+  total:
+  sold:
+  rank:
+  tflops:

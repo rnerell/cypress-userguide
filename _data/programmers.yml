@@ -1,0 +1,22 @@
+navigation:
+- id: MapReduce
+  path: programmers/MapReduce.markdown
+  mainTitle: MapReduce Programming Paradigm
+  navTitle: MapReduce
+- id: HadoopMapReduce
+  path: programmers/HadoopMapReduce.markdown
+  mainTitle: Hadoop MapReduce
+  navTitle: HadoopMapReduce
+- id: Spark
+  path: programmers/Spark.markdown
+  mainTitle: "Spark: In-memory MapReduce"
+  navTitle: Spark
+- id: R
+  path: programmers/R.markdown
+  mainTitle: Big Data Analytics in R
+  navTitle: R
+- id: Python
+  path: programmers/Python.markdown
+  mainTitle: Big Data Analytics in Python
+  navTitle: Python
+

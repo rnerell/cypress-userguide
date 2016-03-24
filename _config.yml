@@ -1,0 +1,5 @@
+name: Clemson University Hadoop Cluster
+markdown: rdiscount
+highlighter: pygments
+include: ['.htaccess']
+exclude: ['README','deploy.sh','build.sh']

@@ -1,0 +1,164 @@
+
+From the compiler suites installed on Palmetto, only PGI `pgi/14.2` supports OpenACC directives.
+Consider the following C file `test_acc.c`
+
+{% highlight cpp %}
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main(){
+
+  int N = 1000000;
+  int i;
+
+  double *A;
+  double sum = 0.0;
+
+  A = (double *)malloc(N*sizeof(double));
+
+#pragma acc kernels
+  for(i=0; i<N; i++){
+    double x = 1.0*i;
+    A[i] = sin(x)*sin(x) + cos(x)*cos(x);
+  }
+
+#pragma acc kernels
+  for(i=0; i<N; i++){
+    sum += A[i];
+  }
+
+  free(A);
+
+  printf("N   : %d \n",N);
+  printf("Sum : %lf \n",sum);
+
+}
+
+{% endhighlight %}
+
+This file uses OpenACC directives for offloading the calculations to the accelerator. 
+It can be compiled on Palmetto using PGI compiler 
+
+    $ qsub -I -l select=1:ncpus=1:ngpus=1
+    ...
+    $ module load pgi/14.2
+    $ pgcc -acc test_acc.c -o test.x 
+    
+On nodes with NVIDIA K20 cards the compilation can be specialized to optimize the code
+for that particular accelerator
+
+    $ pgcc -acc -ta=tesla:kepler test_acc.c -o test.x 
+   
+Similar specialization can be done on NVIDIA M2070 cards using option `-ta=tesla:fermi`.
+Information about the compilation of specific OpenACC directives may be requested 
+using the `-Minfo=accel` switch
+
+    $ pgcc -acc -ta=tesla:kepler -Minfo=accel test_acc.c -o test.x 
+    main:
+     15, Generating present_or_copyin(A[0:1000000])
+         Generating NVIDIA code
+     16, Loop is parallelizable
+         Accelerator kernel generated
+         16, #pragma acc loop gang, vector(128) /* blockIdx.x threadIdx.x */
+     21, Generating present_or_copyin(A[0:1000000])
+         Generating NVIDIA code
+     2gg2, Loop is parallelizable
+         Accelerator kernel generated
+         22, #pragma acc loop gang, vector(128) /* blockIdx.x threadIdx.x */
+         23, Sum reduction generated for sum
+
+Being logged in to the node with NVIDIA GPUs, you may request information about the 
+present accelerators and the appropriate optimization switch
+
+    $ pgaccelinfo
+    CUDA Driver Version:           6000
+    NVRM version:                  NVIDIA UNIX x86_64 Kernel Module  331.49  Wed Feb 12 20:42:50 PST 2014
+    
+    Device Number:                 0
+    Device Name:                   Tesla K20m
+    Device Revision Number:        3.5
+    Global Memory Size:            5032706048
+    Number of Multiprocessors:     13
+    Number of SP Cores:            2496
+    Number of DP Cores:            832
+    Concurrent Copy and Execution: Yes
+    Total Constant Memory:         65536
+    Total Shared Memory per Block: 49152
+    Registers per Block:           65536
+    Warp Size:                     32
+    Maximum Threads per Block:     1024
+    Maximum Block Dimensions:      1024, 1024, 64
+    Maximum Grid Dimensions:       2147483647 x 65535 x 65535
+    Maximum Memory Pitch:          2147483647B
+    Texture Alignment:             512B
+    Clock Rate:                    705 MHz
+    Execution Timeout:             No
+    Integrated Device:             No
+    Can Map Host Memory:           Yes
+    Compute Mode:                  default
+    Concurrent Kernels:            Yes
+    ECC Enabled:                   Yes
+    Memory Clock Rate:             2600 MHz
+    Memory Bus Width:              320 bits
+    L2 Cache Size:                 1310720 bytes
+    Max Threads Per SMP:           2048
+    Async Engines:                 2
+    Unified Addressing:            Yes
+    Initialization time:           67154 microseconds
+    Current free memory:           4942639104
+    Upload time (4MB):             1571 microseconds ( 962 ms pinned)
+    Download time:                 1211 microseconds ( 892 ms pinned)
+    Upload bandwidth:              2669 MB/sec (4359 MB/sec pinned)
+    Download bandwidth:            3463 MB/sec (4702 MB/sec pinned)
+    PGI Compiler Option:           -ta=tesla:cc35
+    ...
+
+A runtime information about the OpenACC kernels may be requested by setting an environmental variable 
+`PGI_ACC_TIME` to 1, for example 
+
+    $ PGI_ACC_TIME=1 ./test.x 
+    N   : 1000000 
+    Sum : 1000000.000000 
+    
+    Accelerator Kernel Timing data
+    /home/zziolko/tests/openacc/test_acc.c
+      main  NVIDIA  devicenum=0
+        time(us): 3,008
+        15: data region reached 1 time
+            21: data copyout reached 1 time
+                 device time(us): total=1,245 max=1,245 min=1,245 avg=1,245
+        15: compute region reached 1 time
+            16: kernel launched 1 time
+                grid: [7813]  block: [128]
+                 device time(us): total=313 max=313 min=313 avg=313
+                elapsed time(us): total=559 max=559 min=559 avg=559
+        21: data region reached 1 time
+            21: data copyin reached 1 time
+                 device time(us): total=1,315 max=1,315 min=1,315 avg=1,315
+        21: compute region reached 1 time
+            22: kernel launched 1 time
+                grid: [7813]  block: [128]
+                 device time(us): total=106 max=106 min=106 avg=106
+                elapsed time(us): total=309 max=309 min=309 avg=309
+            22: reduction kernel launched 1 time
+                grid: [1]  block: [256]
+                 device time(us): total=29 max=29 min=29 avg=29
+                elapsed time(us): total=39 max=39 min=39 avg=39
+
+PGI compiler provides several environmental variables for tracking the OpenACC parallel regions and 
+the execution of the program, the most important ones are listed below
+
+Variable                 | Description
+------------------------ | --------------------------------------------------------------------------------
+`PGI_ACC_TIME`           | Simple profile information to measure execution time and data movement
+`PGI_ACC_PROFILE`        | Collects information for `pgprof`
+`PGI_ACC_NOTIFY`         | One line per kernel info about launch and data movement
+`PGI_ACC_DEVICE_NUM`     | Sets the default device number to use (overrides `ACC_DEVICE_NUM`)
+`PGI_ACC_BUFFERSIZE`     | Defines size of the buffer to data transfers
+`PGI_ACC_CUDA_GANGLIMIT` | Defines the maximum number of gangs
+
+More information:
+
+* OpenACC standard <http://www.openacc-standard.org/>
+

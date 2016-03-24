@@ -1,0 +1,50 @@
+
+#### Abaqus Batch Jobs
+
+We currently have Abaqus version 6.10 available on Palmetto and there are 602 licenses available.  
+When you run Abaqus, a license must be checked-out for each compute core that your job uses. 
+This check-out process is automatic, so there's no need to do anything but run Abaqus in your job.
+
+To see how many licenses are available for use, load the abaqus/6.10 module and run this command:
+
+    abaqus licensing lmstat -a
+
+That will produce a large amount of detailed information.  If you want a quick summary of license 
+usage, try piping the output to a grep command:
+
+    abaqus licensing lmstat -a | grep "Users of standard:"
+
+    Users of standard:  (Total of 602 licenses issued;  Total of 5 licenses in use)
+
+Below is an example Abaqus job script.  The Abaqus executable is named abq610ef1.exe.
+
+{% highlight bash %}
+#!/bin/bash
+#PBS -N AbDemo
+#PBS -l select=2:ncpus=8:mpiprocs=8:mem=6gb:interconnect=mx,walltime=00:15:00
+#PBS -j oe
+
+source /etc/profile.d/modules.sh
+module purge
+module add abaqus/6.10
+
+NCORES=`qstat -xf $PBS_JOBID | grep List.ncpus | sed 's/^.\{26\}//'`
+cd $PBS_O_WORKDIR
+
+/opt/abaqus/6.10/6.10-EF1/exec/abq610ef1.exe cpus=$NCORES job=abdemo input=abdemo.inp interactive
+{% endhighlight %}
+
+#### Using the Abaqus Viewer
+
+You can display and use the Abaqus Viewer interface by setting up X11 Tunneling with SSH and then 
+running the viewer with the following command (here, you must specify that you want to use the MESA 
+software libraries):
+
+  /opt/abaqus/6.10/6.10-EF1/exec/abq610ef1.exe viewer -mesa
+
+Of course, when you're running the Abaqus Viewer on Palmetto, you'll only be able to access Palmetto's 
+filesystems (`/home`, `/newscratch`, `/local_scratch`, etc.).  If you have files on your local 
+workstation that you wish open, you'll first need to transfer those files to Palmetto.
+
+![Abaqus]({{site.data.main.palmetto_url}}/images/abaqus.1.jpg)
+

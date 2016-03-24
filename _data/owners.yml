@@ -1,0 +1,5 @@
+navigation:
+- id: info
+  path: owners/PurchaseInfo.markdown
+  mainTitle: Cypress purchase contact person
+  navTitle: Purchase info
