@@ -1,10 +1,10 @@
-Hadoop Distributed File System, the underlying storage support infrastructure of DSCI, follows a write-once-read-many model with emphasis on sequential access. HDFS does not employ RAID to support fault tolerant and error recovery. Rather, it uses a straightforward data replication scheme. The default replication rate for Cypress is 2, which means that each data file is automatically replicated three times across different nodes on Cypress.
+Hadoop Distributed File System, the underlying storage support infrastructure of DSCI, follows a write-once-read-many model with emphasis on sequential access. HDFS does not employ RAID to support fault tolerant and error recovery. Rather, it uses a straightforward data replication scheme. The default replication rate for Cypress is 2, which means that each data file is automatically replicated twice across different nodes on Cypress.
 
 If you have a data set that is not bound by IP and licenses, please consider working with us to store your data under hdfs:///user/repository so that it can be shared with other DSCI users.
 
-By default, each account can have up to 0.5TB of storage (total 1.5TB with replication). We are currently working on a priority storage scheme to support DSCI owners withadditional storage requirements. 
+By default, each account can have up to 0.5TB of storage (total 1.0TB with replication). We are currently working on a priority storage scheme to support DSCI owners withadditional storage requirements. 
 
-To check for status of your storage, you can use the following command:
+To check for status of your storage, you can use the following command (replace lngo with your username):
 
     [lngo@resourcemgr ~]$ hdfs fsck /user/lngo
       Total size:    2196596137 B
