@@ -1,4 +1,4 @@
-Hadoop MapReduce is the default execution engine to support data processing and analytics on top of the Hadoop Distributed File System. Hadoop MapReduce implements libraries to enable the MapReduce programming model. While the standard language for developing Hadoop MapReduce applications is Java, Hadoop MapReduce also supports calling other executables/scripts as map/reduce/combiner/partitioner functions through [Hadoop Streaming](http://citi.clemson.edu/hadoop/pages/software.html#mapreduce) support. 
+Hadoop MapReduce is the default execution engine to support data processing and analytics on top of the Hadoop Distributed File System. Hadoop MapReduce implements libraries to enable the MapReduce programming model. While the standard language for developing Hadoop MapReduce applications is Java, Hadoop MapReduce also supports calling other executables/scripts as map/reduce/combiner/partitioner functions through [Hadoop Streaming]({{ "/pages/software.html#mapreduce" | prepend:site.baseurl }}) support. 
 
 The basic anatomy of a Java Hadoop MapReduce application is as followed:
 
@@ -163,4 +163,3 @@ Partial content of the ouput files part-r-00000:
     you?'   3
 
   
-
