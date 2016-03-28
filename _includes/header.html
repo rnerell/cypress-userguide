@@ -6,10 +6,9 @@
 
     <title>{{ page.title }} | {{ site.name }} </title>
 
-    <link href="{{site.data.main.hadoop_url}}/assets/css/bootstrap.css" rel="stylesheet">
-    <link href="{{site.data.main.hadoop_url}}/assets/css/docs.css" rel="stylesheet">
-    <link href="{{site.data.main.hadoop_url}}/assets/css/footer.css" rel="stylesheet">
-    <link href="{{site.data.main.hadoop_url}}/assets/css/syntax.css" rel="stylesheet">
+    <link href={{ "/assets/css/bootstrap.css" | prepend:site.baseurl }} rel="stylesheet">
+    <link href={{ "/assets/css/docs.css" | prepend:site.baseurl }} rel="stylesheet">
+    <link href={{ "/assets/css/footer.css" | prepend:site.baseurl }} rel="stylesheet">
+    <link href={{ "/assets/css/syntax.css" | prepend:site.baseurl }} rel="stylesheet">
 
   </head>
-

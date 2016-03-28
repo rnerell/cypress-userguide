@@ -3,3 +3,4 @@ markdown: rdiscount
 highlighter: pygments
 include: ['.htaccess']
 exclude: ['README','deploy.sh','build.sh']
+baseurl: "/hadoop" # the subpath of your site, e.g. /blog

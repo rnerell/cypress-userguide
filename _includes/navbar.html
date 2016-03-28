@@ -16,7 +16,7 @@
 
         {% for section in site.data.navbar.navigation %}
         <li{% if page.url == section.url %} class="active"{% endif %}>
-        <a href="{{site.data.main.hadoop_url}}{{section.url}}">{{section.text}}</a>
+        <a href="{{site.baseurl}}{{section.url}}">{{section.text}}</a>
         </li>
         {% endfor %}
       </ul>
@@ -24,4 +24,3 @@
     </nav>
   </div>
 </header>    
-
