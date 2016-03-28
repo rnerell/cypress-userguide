@@ -11,5 +11,4 @@ It's very helpful if you can include this information with your message (if appr
 -  The commands used to submit the job to the Cypress cluster
 -  Paste a copy of the error message you see when the problem occurs
 
-Further information about what to do in an emergency can be found in the [Palmetto's User Guide](http://citi.clemson.edu/hadoop/pages/userguide.html#help)
-
+Further information about what to do in an emergency can be found in the [Palmetto's User Guide](http://citi.clemson.edu/palmetto/pages/userguide.html#help)

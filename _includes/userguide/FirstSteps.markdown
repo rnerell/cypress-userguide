@@ -1,2 +1,1 @@
-The configurations of the Cypress staging nodes are similar to those of Palmetto's compute nodes, and they, in fact, share the same home filesystem. Instruction about how to customize your environment (especially important for streaming jobs that drive external applications) can be found at [Palmetto's User Guide](http://citi.clemson.edu/hadoop/pages/userguide.html#first). 
-
+The configurations of the Cypress staging nodes are similar to those of Palmetto's compute nodes, and they, in fact, share the same home filesystem. Instruction about how to customize your environment (especially important for streaming jobs that drive external applications) can be found at [Palmetto's User Guide](http://citi.clemson.edu/palmetto/pages/userguide.html#first). 
