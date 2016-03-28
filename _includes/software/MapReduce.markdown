@@ -64,7 +64,7 @@ command_options | Description |
 `-applicationId <applcation id>` | Specify an application id | 
 `-appOwner <AppOwner>` | Owner of the app |
 `containerId <containerId>` | Containter ID. Must be specified if node address is specified |
-`-nodeAddres <NodeAddress>` | Address of the node to get the log from, in the form nodename:port. Must be specified if containedId is specified |
+`-nodeAddress <NodeAddress>` | Address of the node to get the log from, in the form nodename:port. Must be specified if containedId is specified |
 
 
 #### COMMAND: queue
