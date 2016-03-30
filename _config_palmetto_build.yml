@@ -1,5 +1,7 @@
 name: Clemson University Hadoop Cluster
-highlighter: rouge
+markdown: rdiscount
+highlighter: pygments
 include: ['.htaccess']
 exclude: ['README','deploy.sh','build.sh','Makefile','README.md']
-baseurl: "/cypress-userguide" # the subpath of your site, e.g. /blog
+baseurl: "/hadoop" # the subpath of your site, e.g. /blog
+
