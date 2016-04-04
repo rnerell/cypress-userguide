@@ -38,7 +38,7 @@ h1, h2, h3, h4 {
 
 .bs-docs-nav {
   margin-bottom: 0;
-  background-color: #EA6A20; /* Clemson orange */
+  background-color: #522D80; /* Clemson Regalia (purple) */
   border-bottom: 0;
 }
 .bs-home-nav .bs-nav-b {
@@ -209,7 +209,7 @@ h1, h2, h3, h4 {
   color: #474747;
   text-decoration: none;
   background-color: transparent;
-  border-left: 20px solid #EA6A20;
+  border-left: 20px solid #522D80;
 }
 .bs-docs-sidebar .nav > .active > a,
 .bs-docs-sidebar .nav > .active:hover > a,
@@ -218,7 +218,7 @@ h1, h2, h3, h4 {
   font-weight: bold;
   color: #474747;
   background-color: transparent;
-  border-left: 20px solid #EA6A20;
+  border-left: 20px solid #522D80;
 }
 
 /* Nav: second level (shown on .active) */
@@ -256,7 +256,7 @@ h1, h2, h3, h4 {
 }
 .back-to-top:hover {
   text-decoration: none;
-  color: #EA6A20;
+  color: #522D80;
 }
 
 
@@ -316,8 +316,8 @@ h1, h2, h3, h4 {
 h1[id] {
   margin-top: 0;
   padding-top: 20px;
-  color: #EA6A20;
-  border-bottom: 1px solid #EA6A20;
+  color: #522D80;
+  border-bottom: 1px solid #522D80;
 }
 
 /* Table */
