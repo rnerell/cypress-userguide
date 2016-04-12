@@ -1,4 +1,5 @@
 name: Clemson University Hadoop Cluster
+markdown: rdiscount
 highlighter: rouge
 include: ['.htaccess']
 exclude: ['README','deploy.sh','build.sh','Makefile','README.md']
