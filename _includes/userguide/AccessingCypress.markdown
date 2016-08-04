@@ -41,8 +41,8 @@ Support HelpDesk at **864-656-3494**. They may be able to help you with verifyin
 
 There are web interfaces for many of the various services included with HDP, but the *Ambari* interface is one of the most important for understanding the status and configuration of the cluster.
 
-- This interface can be accessed at http://dscim003.palmetto.clemson.edu:8080.
-- The public login/password to observe the server component is *user/user*.
+- This interface can be accessed at: http://dscim003.palmetto.clemson.edu:8080
+- The public (read-only) login/password to use Ambari is *user/user*
 
 **NOTE:** This web interface, as well as all of the other web interfaces are only available internally to Palmetto nodes. To view these interfaces, you must open a Firefox browser on dsciu001-ext.palmetto.clemson.edu or user.palmetto.clemson.edu via X11 tunnel. Instructions detailing how to set up X11 tunneling can be found <a href="http://www.palmetto.clemson.edu/pages/userguide.html#graphical" target="_blank">here</a>.
 
