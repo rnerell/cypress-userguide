@@ -1,1 +1,1 @@
-Cypress follows the same guideline as Palmetto, as described in [Palmetto's User Guide](http://citi.clemson.edu/palmetto/pages/userguide.html#graduating)
+Cypress follows the same guidelines as Palmetto, as described in <a href="http://www.palmetto.clemson.edu/pages/userguide.html#graduating" target="_blank">Palmetto's User Guide</a>.
