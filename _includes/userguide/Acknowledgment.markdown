@@ -1,6 +1,7 @@
 
-We would appreciate if all publications that include resutls generated using Cypress
-cluster inlude short statement in the Acknowledgment section. 
+We request that all publications that include results generated using the Cypress
+Cluster include a short statement in the Acknowledgments section.
+
 An example acknowledgment may look like this:
 
 **Clemson University is acknowledged for generous allotment of compute time on Cypress cluster.**

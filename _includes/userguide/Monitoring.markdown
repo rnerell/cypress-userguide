@@ -12,9 +12,9 @@ Usually, only one of the two namenodes will be active.
 #### YARN
 The UI for YARN's Resource Manager is:
 
-    dscim003.palmetto.clemson.edu:8088
-    OR
     dscim001.palmetto.clemson.edu:8088
+    OR
+    dscim003.palmetto.clemson.edu:8088
 
 #### HBase
 The UIs for HBase's Master Server is:
@@ -41,7 +41,7 @@ The UI for Accumulo is:
 #### Kafka
 Kafka brokers are located at:
 
-dsci[002-4].palmetto.clemson.edu:50095
+dsci[002,004,006].palmetto.clemson.edu:50095
 
 
 #### Spark
