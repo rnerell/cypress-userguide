@@ -30,6 +30,64 @@ e.g.
 
     ssh dsciu001
 
+**Enabling Kerberos authentication for the Hadoop infrastructure on Cypress**
+
+As part of the authentication and authorization mechanism of Cypress to ensure
+individual security, we utilize Kerberos to enable interactions between users
+and the Hadoop infrastructure on Cypress. In the future, Kerberos will be
+authenticated against Clemson University's LDAP server. At the moment, a
+separate Kerberos account is needed for each user, which will be created with a
+default password at the time that the user is granted access to Cypress.
+
+When you first log into **dsciu001**, you need to change the default Kerberos
+password. We recommend that you change Kerberos password to match Clemson password. The steps to change Keberos password are as followed:
+
+1. Connect to the dsciu001 node:
+```sh
+ssh user@dsciu001-ext.palmetto.clemson.edu
+```
+2. Type your Clemson password and press enter.
+
+3. Run kpasswd to change your Kerberos password:
+```sh
+kpasswd
+```
+4. Type the provided temporary password for Kerberos and press enter.
+5. Type your new password and press enter.
+6. Type your new password and press enter again.
+
+In order for you to run hdfs or yarn commands successfully, you must be authenticated by Kerberos on the dsciu001 node.
+
+1. Connect to the dsciu001 node (if you are not already connected to it):
+```sh
+ssh user@dsciu001-ext.palmetto.clemson.edu
+```
+
+2. Run the following command:
+```sh
+kinit
+```
+3. Type your Kerberos password and press enter.
+
+Now, you should be able to interact with Hadoop components on Cypress.
+
+**NOTE:** The authentication ticket will expire (default is 1 day), so you will need to run kinit again to renew the ticket.
+
+To check when your ticket will expire:
+
+1. Run the following on the dsciu001 node:
+```sh
+klist
+```
+
+Which produces output similar to this if you have already run kinit successfully:
+
+    Ticket cache: FILE:/tmp/krb5cc_137830
+    Default principal: user@PALMETTO.CLEMSON.EDU
+
+    Valid starting       Expires              Service principal
+    06/10/2016 11:06:49  06/11/2016 11:06:49  krbtgt/PALMETTO.CLEMSON.EDU@PALMETTO.CLEMSON.EDU
+
 **Password problems?**  
 
 Usernames and passwords should always be entered in a case-sensitive fashion (not all-caps).
