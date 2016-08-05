@@ -1,7 +1,7 @@
 navigation:
 - id: officehours
   path: userguide/OfficeHours.markdown
-  mainTitle: Cypress Office Hours (Tuesdays 2-5pm, 2138 Barre Hall)
+  mainTitle: Cypress Office Hours (Wednesdays 8-11am, 2138 Barre Hall)
   navTitle: Office Hours
 - id: help
   path: userguide/NeedHelp.markdown
@@ -51,4 +51,3 @@ navigation:
   path: userguide/GraduatingStudents.markdown
   mainTitle: Graduating Students and Account Expiration
   navTitle: Account Expiration
-

@@ -1,4 +1,4 @@
-In the current settings, management of Cypress data, including upload to and download from HDFS, has to be done from **resourcemgr.palmetto.clemson.edu**. The resourcemgr node is configured to have access to /home and /scratch2 directories. 
+In the current settings, management of Cypress data, including upload to and download from HDFS, has to be done from **dsciu001.palmetto.clemson.edu**. The dsciu001 node is configured to have access to /home and /scratch2 directories.
 
 The general syntax for file and directory management on Cypress is as followed:
 
@@ -57,5 +57,3 @@ The commands and commandOptions are similar to those of a Linux file system:
       -libjars <comma separated list of jars>    specify comma separated jar files to include in the classpath.
       -archives <comma separated list of archives>    specify comma separated archives to be unarchived on the compute machines.
     The general command line syntax is bin/hadoop command [genericOptions] [commandOptions]
-
-
