@@ -1,7 +1,7 @@
 
 ## HDFS
 
-Hadoop Distributed File System (HDFS), the underlying storage support infrastructure of DSCI, follows a write-once-read-many model with emphasis on sequential access. Files may not be modified after they have been created and closed.
+Hadoop Distributed File System (HDFS), the underlying storage support infrastructure of the Cypress Cluster, follows a write-once-read-many model with emphasis on sequential access. Files may not be modified after they have been created and closed.
 
 ### HDFS Fault Tolerance
 
@@ -13,7 +13,7 @@ By default, each user account can have up to 0.5TB of storage (total 1.0TB with 
 
 To check for status of your storage, you can use the following command (replace lngo with your username):
 
-    [lngo@resourcemgr ~]$ hdfs fsck /user/lngo
+    [lngo@dsciu001 ~]$ hdfs fsck /user/lngo
       Total size:    2196596137 B
       Total dirs:    1095
       Total files:   3268
@@ -33,3 +33,15 @@ To check for status of your storage, you can use the following command (replace 
       The filesystem under path '/user/lngo' is HEALTHY
 
 Additional information about the storage can be viewed by adding **-files**, **-blocks**, and **-locations** flags to the end of the command.
+
+
+## Which File Systems Are Present On Particular Cypress Nodes
+
+Of the many Cypress Cluster nodes, **only** the Cypress *User Node* has Palmetto's */home, /scratch1, /scratch2*, and *owner purchased* filesystems mounted; however, all of the Cypress nodes have the */software* file system mounted.
+
+This configuration is atypical compared with the configuration of Palmetto compute nodes, and the reason is intentional:
+
+- Only the Cypress User Node should be used to stage data in and out of HDFS from the other file systems mentioned above since HDFS should be the only file system used by jobs running on Cypress.
+- **NOTE**: We make an exception for the */software* file system, and it is available on all nodes (similarly to Palmetto compute nodes) because we know users may want to leverage the programs and libraries available under */software* in their jobs.
+
+Also, **it is important to understand that HDFS is not a typical mounted file system**. You must use the ```hdfs``` command, which is present on *dsciu001*, to interact with HDFS. This is discussed in more detail below.
