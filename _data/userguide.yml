@@ -7,7 +7,7 @@ navigation:
   path: userguide/NeedHelp.markdown
   mainTitle: Need Help? Contact Our Support Team
   navTitle: Need help?
-- id: acknowledgment 
+- id: acknowledgment
   path: userguide/Acknowledgment.markdown
   mainTitle: Acknowledging Cypress cluster
   navTitle: Acknowledgment
@@ -34,14 +34,14 @@ navigation:
 - id: monitoring
   path: userguide/Monitoring.markdown
   mainTitle: Monitoring your Jobs (or Job Queues)
-  navTitle: Monitoring jobs  
+  navTitle: Monitoring jobs
 - id: storage
   path: userguide/Storage.markdown
-  mainTitle: Data Storage and Storage Space 
+  mainTitle: Data Storage and Storage Space
   navTitle: Storage
 - id: transfer
   path: userguide/DataTransfers.markdown
-  mainTitle: Dat (files and directories) management on Cypress
+  mainTitle: Data Management on Cypress
   navTitle: Data Management
 - id: troubleshooting
   path: userguide/Troubleshooting.markdown
