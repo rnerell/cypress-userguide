@@ -4,11 +4,13 @@ YARN applications (e.g., MapReduce, Spark, non-Hadoop applications, etc.) are su
 
 ## Default Queue
 Any user with an account on Cypress can submit jobs to the default queue (root.default). Jobs are submitted to this queue by default unless otherwise specified. The amount of cluster capacity guaranteed to this queue fluctuates with:
+
 - the addition of new hardware (purchased in lots by CCIT that are called *phases*)
 - owner purchases of cluster resources
 - hardware falling out of warranty and thus any associated ownership of them expiring
 
 So, the capacity guaranteed to this queue is composed of:
+
 - new phases of hardware that have not been purchased by owners.
 - hardware that has fallen out of warranty but is still operational
 
@@ -17,6 +19,7 @@ If you purchase a percentage of the cluster's resources, then a queue will be cr
 
 ### Who can access my queue?
 You may specify which users and groups are allowed to submit to your queue by specifying:
+
 - a list of one or more *users* AND/OR
 - a list of one or more *group* of users
 
