@@ -47,7 +47,7 @@ There are web interfaces for many of the various services included with HDP, but
 - This interface can be accessed at: http://dscim003.palmetto.clemson.edu:8080
 - The public (read-only) login/password to use Ambari is *user/user*
 
-**NOTE:** This web interface, as well as all of the other web interfaces are only available internally to Palmetto nodes. To view these interfaces, you must open a Firefox browser on cypress.clemson.edu or user.palmetto.clemson.edu via X11 tunnel. Instructions detailing how to set up X11 tunneling can be found <a href="http://www.palmetto.clemson.edu/pages/userguide.html#graphical" target="_blank">here</a>.
+**NOTE:** This web interface, as well as all of the other web interfaces are only available internally to Palmetto nodes. To view these interfaces, you must open a Firefox browser on cypress.clemson.edu or user.palmetto.clemson.edu via X11 tunnel. Instructions detailing how to set up X11 tunneling can be found <a href="https://www.palmetto.clemson.edu/palmetto/pages/userguide.html#graphical" target="_blank">here</a>.
 
 - Once your computer is configured for X11 tunneling, opening Ambari is as simple as this:
   - ```ssh -X username@cypress.clemson.edu 'firefox http://dscim003.palmetto.clemson.edu:8080'```

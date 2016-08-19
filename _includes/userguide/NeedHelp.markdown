@@ -11,4 +11,4 @@ It's very helpful if you can include this information with your message (if appr
 -  The commands used to submit the job to the Cypress cluster
 -  Paste a copy of the error message you see when the problem occurs
 
-Further information about what to do in an emergency can be found in the <a href="http://www.palmetto.clemson.edu/pages/userguide.html#help" target="_blank">Palmetto's User Guide</a>.
+Further information about what to do in an emergency can be found in the <a href="https://www.palmetto.clemson.edu/palmetto/pages/userguide.html#appendix1" target="_blank">Palmetto's User Guide</a>.

@@ -27,7 +27,7 @@ Now, you should be able to interact with Hadoop components on Cypress.
 
 ### Verify
 
-**NOTE:** The authentication ticket will expire (default is 1 day), so you will need to run kinit again to renew the ticket.
+**NOTE:** The authentication ticket will expire (default is 7 days), so you will need to run kinit again to renew the ticket.
 
 To check when your ticket will expire:
 
@@ -39,8 +39,8 @@ To check when your ticket will expire:
     Default principal: username@PALMETTO.CLEMSON.EDU
 
     Valid starting       Expires              Service principal
-    06/10/2016 11:06:49  06/11/2016 11:06:49  krbtgt/PALMETTO.CLEMSON.EDU@PALMETTO.CLEMSON.EDU
+    08/19/2016 16:45:04  08/26/2016 16:45:04  krbtgt/PALMETTO.CLEMSON.EDU@PALMETTO.CLEMSON.EDU
 
 ## Environment Customization
 
-Instructions detailing how to customize your environment (especially important for streaming jobs that drive external applications) can be found at <a href="http://www.palmetto.clemson.edu/pages/userguide.html#software" target="_blank">Palmetto's User Guide</a>.
+Instructions detailing how to customize your environment (especially important for streaming jobs that drive external applications) can be found at <a href="https://www.palmetto.clemson.edu/palmetto/pages/userguide.html#software" target="_blank">Palmetto's User Guide</a>.
