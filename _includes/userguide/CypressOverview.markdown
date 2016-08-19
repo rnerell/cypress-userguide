@@ -8,5 +8,5 @@ Phase	| Count | Make | Model | CPU type | Cores | RAM | Local Storage | Host Nam
 
 **NOTE:** The following nodes are not described above because they are dedicated for user access and master services respectively:
 
-- **USER NODE**: dsciu001.palmetto.clemson.edu
+- **USER NODE**: dsciu001.palmetto.clemson.edu (also known as cypress.clemson.edu)
 - **MASTER NODES:** {dscim001-dscim003}.palmetto.clemson.edu

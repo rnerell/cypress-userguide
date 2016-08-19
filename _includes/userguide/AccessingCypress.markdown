@@ -16,15 +16,17 @@ The purpose of the Cypress Cluster User Node is to provide access to users via S
 
 ### Connecting to the User Node
 
-The best way to access the Cypress User Node is to connect directly to it via SSH at the following address: **dsciu001-ext.palmetto.clemson.edu**
+The best way to access the Cypress User Node is to connect directly to it via SSH at the following address: **cypress.clemson.edu**
 
 e.g.
 
-    ssh username@dsciu001-ext.palmetto.clemson.edu
+    ssh username@cypress.clemson.edu
 
-- **NOTE:** If you are connecting from outside the Clemson network, then you must establish a VPN session before attempting to use the dsciu001-ext.palmetto.clemson.edu address. See [this link](https://www.clemson.edu/ccit/get_connected/vpn/) for more information on using VPN.
+- **NOTE:** If you are connecting from outside the Clemson network, then you must establish a VPN session before attempting to use the cypress.clemson.edu address. See [this link](https://www.clemson.edu/ccit/get_connected/vpn/) for more information on using VPN.
 
 ### Connecting to the User Node from any node on Palmetto
+
+*dsciu001* is the hostname of the Cypress Cluster User Node but this short address only works if you are already on the Palmetto network. *cypress.clemson.edu* is an easy to use alternative that works anywhere. They both refer to the same physical server. **Throughout this documentation you might see cypress.clemson.edu and dsciu001 used interchangeably.**
 
 You may connect to the Cypress User Node from any Palmetto node using the following short hostname: **dsciu001**
 
@@ -45,8 +47,8 @@ There are web interfaces for many of the various services included with HDP, but
 - This interface can be accessed at: http://dscim003.palmetto.clemson.edu:8080
 - The public (read-only) login/password to use Ambari is *user/user*
 
-**NOTE:** This web interface, as well as all of the other web interfaces are only available internally to Palmetto nodes. To view these interfaces, you must open a Firefox browser on dsciu001-ext.palmetto.clemson.edu or user.palmetto.clemson.edu via X11 tunnel. Instructions detailing how to set up X11 tunneling can be found <a href="http://www.palmetto.clemson.edu/pages/userguide.html#graphical" target="_blank">here</a>.
+**NOTE:** This web interface, as well as all of the other web interfaces are only available internally to Palmetto nodes. To view these interfaces, you must open a Firefox browser on cypress.clemson.edu or user.palmetto.clemson.edu via X11 tunnel. Instructions detailing how to set up X11 tunneling can be found <a href="http://www.palmetto.clemson.edu/pages/userguide.html#graphical" target="_blank">here</a>.
 
 - Once your computer is configured for X11 tunneling, opening Ambari is as simple as this:
-  - ```ssh -X username@dsciu001-ext.palmetto.clemson.edu 'firefox http://dscim003.palmetto.clemson.edu:8080'```
+  - ```ssh -X username@cypress.clemson.edu 'firefox http://dscim003.palmetto.clemson.edu:8080'```
 - **NOTE:** You will achieve the best results if you use a wired network connection located on campus.
