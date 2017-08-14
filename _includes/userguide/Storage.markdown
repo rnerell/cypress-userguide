@@ -13,7 +13,7 @@ By default, each user account can have up to 0.5TB of storage (total 1.0TB with 
 
 To check for status of your storage, you can use the following command (replace lngo with your username):
 
-    [lngo@dsciu001 ~]$ hdfs fsck /user/lngo
+    [lngo@dsciutil ~]$ hdfs fsck /user/lngo
       Total size:    2196596137 B
       Total dirs:    1095
       Total files:   3268
@@ -44,4 +44,4 @@ This configuration is atypical compared with the configuration of Palmetto compu
 - Only the Cypress User Node should be used to stage data in and out of HDFS from the other file systems mentioned above since HDFS should be the only file system used by jobs running on Cypress.
 - **NOTE**: We make an exception for the */software* file system, and it is available on all nodes (similarly to Palmetto compute nodes) because we know users may want to leverage the programs and libraries available under */software* in their jobs.
 
-Also, **it is important to understand that HDFS is not a typical mounted file system**. You must use the ```hdfs``` command, which is present on *dsciu001*, to interact with HDFS. This is discussed in more detail below.
+Also, **it is important to understand that HDFS is not a typical mounted file system**. You must use the ```hdfs``` command, which is present on *dsciutil*, to interact with HDFS. This is discussed in more detail below.

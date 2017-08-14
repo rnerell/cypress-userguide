@@ -1,10 +1,10 @@
-Management of Cypress data, including upload to and download from HDFS, has to be done from **dsciu001**. The dsciu001 node is configured to have access to other file systems used with Palmetto:
+Management of Cypress data, including upload to and download from HDFS, has to be done from **dsciutil**. The dsciutil node is configured to have access to other file systems used with Palmetto:
 - */home*
 - */scratch1*
 - */scratch2*
 - etc.
 
-You might already have some data stored on those other file systems, so remember: ONLY **dsciu001** is configured to allow you to move data between HDFS and the other file systems mentioned above.
+You might already have some data stored on those other file systems, so remember: ONLY **dsciutil** is configured to allow you to move data between HDFS and the other file systems mentioned above.
 
 The general syntax for file and directory management on Cypress is as followed:
 
@@ -12,7 +12,7 @@ The general syntax for file and directory management on Cypress is as followed:
 
 The commands and commandOptions are similar to those of a Linux file system:
 
-    [username@dsciu001 ~]$ hdfs dfs
+    [username@dsciutil ~]$ hdfs dfs
     Usage: hadoop fs [generic options]
         [-appendToFile <localsrc> ... <dst>]
         [-cat [-ignoreCrc] <src> ...]

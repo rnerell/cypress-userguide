@@ -132,14 +132,14 @@ It is important to note that the paths provided in the previous *yarn* call are 
 
 The contents of the output directory after a successful execution:
 
-    [lngo@dsciu001 hadoop-userguide]$ hdfs dfs -ls /user/lngo/outputWordCount
+    [lngo@dsciutil hadoop-userguide]$ hdfs dfs -ls /user/lngo/outputWordCount
     Found 2 items
     -rw-r--r--   2 lngo hdfs          0 2016-03-16 09:57 /user/lngo/outputWordCount/_SUCCESS
     -rw-r--r--   2 lngo hdfs     721220 2016-03-16 09:57 /user/lngo/outputWordCount/part-r-00000
 
 Partial content of the ouput files part-r-00000:
 
-    [lngo@dsciu001 hadoop-userguide]$ hdfs dfs -tail /user/lngo/outputWordCount/part-r-00000
+    [lngo@dsciutil hadoop-userguide]$ hdfs dfs -tail /user/lngo/outputWordCount/part-r-00000
     u'll    102
     you're  15
     you'st  1
