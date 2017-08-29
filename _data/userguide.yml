@@ -9,7 +9,7 @@ navigation:
   navTitle: Need help?
 - id: acknowledgment
   path: userguide/Acknowledgment.markdown
-  mainTitle: Acknowledging Cypress cluster
+  mainTitle: Acknowledging Cypress Cluster
   navTitle: Acknowledgment
 - id: linux
   path: userguide/LinuxReview.markdown
@@ -17,7 +17,7 @@ navigation:
   navTitle: Review of Linux
 - id: overview
   path: userguide/CypressOverview.markdown
-  mainTitle: Overview of the Cypress cluster
+  mainTitle: Overview of the Cypress Cluster
   navTitle: Overview of Cypress
 - id: access
   path: userguide/AccessingCypress.markdown

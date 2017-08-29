@@ -1,10 +1,10 @@
 
 ## Requesting Access
 
-**To access and use Cypress, both a Palmetto account and a Cypress account are required.** Clemson students, faculty, and staff can request a Palmetto account by completing the online account request form <a href="http://citi.clemson.edu/new-account/" target="_blank">available here</a>.
+**To access and use Cypress, both a Palmetto account and a Cypress account are required.** Clemson students, faculty, and staff can request a Palmetto account by completing the online account request form <a href="http://citi.clemson.edu/new-account/" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer" rel="noopener noreferrer" rel="noopener noreferrer">available here</a>.
 - **NOTE:** If you are requesting a Palmetto account primarily to use Cypress, then write that in the *Research Abstract* answer box of the form. You don't have to provide a detailed explanation on that form.
 
-**Next, you must request access to Cypress** by filling out <a href="https://goo.gl/forms/lkTVwO7zDARqhfrP2" target="_blank">this simple form</a>. Please write a few sentences about how you intend to use Cypress under the "Research Abstract" on this form. Once you receive notification of your account being created on Cypress you'll be able to log into the Cypress Cluster *User Node*.
+**Next, you must request access to Cypress** by filling out <a href="https://goo.gl/forms/lkTVwO7zDARqhfrP2" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer" rel="noopener noreferrer" rel="noopener noreferrer">this simple form</a>. Please write a few sentences about how you intend to use Cypress under the "Research Abstract" on this form. Once you receive notification of your account being created on Cypress you'll be able to log into the Cypress Cluster *User Node*.
 
 ## The Cypress Cluster User Node
 

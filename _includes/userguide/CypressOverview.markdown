@@ -1,5 +1,5 @@
 
-The Cypress cluster uses many components included with the <a href="https://hortonworks.com/products/data-center/hdp/" target="_blank">Hortonworks Data Platform (HDP)</a> - Version 2.6.0.3-8 to support data-intensive computing and big data analytics.
+The Cypress Cluster uses many components included with the <a href="https://hortonworks.com/products/data-center/hdp/" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer" rel="noopener noreferrer" rel="noopener noreferrer">Hortonworks Data Platform (HDP)</a> - Version 2.6.0.3-8 to support data-intensive computing and big data analytics.
 
 Phase	| Count | Make | Model | CPU type | Cores | RAM | Local Storage | Host Names
 --------|-------|------|-------|----------|-------|-----|----------------|--------------

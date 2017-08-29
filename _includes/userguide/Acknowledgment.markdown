@@ -4,4 +4,4 @@ Cluster include a short statement in the Acknowledgments section.
 
 An example acknowledgment may look like this:
 
-**Clemson University is acknowledged for generous allotment of compute time on Cypress cluster.**
+**Clemson University is acknowledged for a generous allotment of compute time and storage on the Cypress Cluster.**

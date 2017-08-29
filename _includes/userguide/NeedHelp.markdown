@@ -8,7 +8,7 @@ Thanks for your patience!
 It's very helpful if you can include this information with your message (if appropriate):
 
 -  Hadoop job ID number
--  The commands used to submit the job to the Cypress cluster
+-  The commands used to submit the job to the Cypress Cluster
 -  Paste a copy of the error message you see when the problem occurs
 
-Further information about what to do in an emergency can be found in the <a href="https://www.palmetto.clemson.edu/palmetto/pages/userguide.html#appendix1" target="_blank">Palmetto's User Guide</a>.
+Further information about what to do in an emergency can be found in the <a href="https://www.palmetto.clemson.edu/palmetto/pages/userguide.html#appendix1" target="_blank" rel="noopener noreferrer">Palmetto's User Guide</a>.
