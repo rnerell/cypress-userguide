@@ -3,6 +3,12 @@ navigation:
   path: software/Overview.markdown
   mainTitle: Palmetto Software Modules on Cypress
   navTitle: Palmetto Modules
+<<<<<<< HEAD
+- id: halvade
+  path: software/Halvade.markdown
+  mainTitle: Using Halvade on Cypress
+  navTitle: Halvade
+=======
 - id: mapreduce
   path: software/MapReduce.markdown
   mainTitle: Using MapReduce on Cypress
@@ -11,6 +17,7 @@ navigation:
   path: software/Tez.markdown
   mainTitle: Using Tez on Cypress
   navTitle: Tez
+>>>>>>> 9065ddec6969b43a4a1c1e3d1314f84e5f91b1a6
 - id: hive
   path: software/Hive.markdown
   mainTitle: Using Hive on Cypress
@@ -19,10 +26,31 @@ navigation:
   path: software/HBase.markdown
   mainTitle: Using HBase on Cypress
   navTitle: HBase
+<<<<<<< HEAD
+- id: kafka
+  path: software/Kafka.markdown
+  mainTitle: Using Kafka on Cypress
+  navTitle: Kafka
+- id: mapreduce
+  path: software/MapReduce.markdown
+  mainTitle: Using MapReduce on Cypress
+  navTitle: MapReduce
+- id: oozie
+  path: software/Oozie.markdown
+  mainTitle: Using Oozie on Cypress
+  navTitle: Oozie
+=======
+>>>>>>> 9065ddec6969b43a4a1c1e3d1314f84e5f91b1a6
 - id: pig
   path: software/Pig.markdown
   mainTitle: Using Pig on Cypress
   navTitle: Pig
+<<<<<<< HEAD
+- id: spark
+  path: software/Spark.markdown
+  mainTitle: Using Spark on Cypress
+  navTitle: Spark
+=======
 - id: sqoop
   path: software/Sqoop.markdown
   mainTitle: Using Sqoop on Cypress
@@ -31,10 +59,17 @@ navigation:
   path: software/Oozie.markdown
   mainTitle: Using Oozie on Cypress
   navTitle: Oozie
+>>>>>>> 9065ddec6969b43a4a1c1e3d1314f84e5f91b1a6
 - id: storm
   path: software/Storm.markdown
   mainTitle: Using Storm on Cypress
   navTitle: Storm
+<<<<<<< HEAD
+- id: tez
+  path: software/Tez.markdown
+  mainTitle: Using Tez on Cypress
+  navTitle: Tez
+=======
 - id: kafka
   path: software/Kafka.markdown
   mainTitle: Using Kafka on Cypress
@@ -44,3 +79,4 @@ navigation:
   mainTitle: Using Spark on Cypress
   navTitle: Spark
 
+>>>>>>> 9065ddec6969b43a4a1c1e3d1314f84e5f91b1a6
