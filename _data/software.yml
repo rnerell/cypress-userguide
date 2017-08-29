@@ -7,7 +7,6 @@ navigation:
   path: software/Halvade.markdown
   mainTitle: Using Halvade on Cypress
   navTitle: Halvade
-=======
 - id: mapreduce
   path: software/MapReduce.markdown
   mainTitle: Using MapReduce on Cypress
@@ -24,7 +23,6 @@ navigation:
   path: software/HBase.markdown
   mainTitle: Using HBase on Cypress
   navTitle: HBase
-<<<<<<< HEAD
 - id: kafka
   path: software/Kafka.markdown
   mainTitle: Using Kafka on Cypress
@@ -37,7 +35,6 @@ navigation:
   path: software/Oozie.markdown
   mainTitle: Using Oozie on Cypress
   navTitle: Oozie
-=======
 - id: pig
   path: software/Pig.markdown
   mainTitle: Using Pig on Cypress
@@ -46,7 +43,6 @@ navigation:
   path: software/Spark.markdown
   mainTitle: Using Spark on Cypress
   navTitle: Spark
-=======
 - id: sqoop
   path: software/Sqoop.markdown
   mainTitle: Using Sqoop on Cypress
@@ -63,7 +59,6 @@ navigation:
   path: software/Tez.markdown
   mainTitle: Using Tez on Cypress
   navTitle: Tez
-=======
 - id: kafka
   path: software/Kafka.markdown
   mainTitle: Using Kafka on Cypress
