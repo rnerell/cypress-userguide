@@ -54,7 +54,7 @@ cd tmp
 git clone https://github.com/biointec/halvade.git
 cd halvade/halvade
 ant
-cd ~/halvade/halvade_upload_tool
+cd ../halvade_upload_tool
 ant
 ```
 
@@ -130,7 +130,7 @@ The input data needs to be preprocessed and stored onto HDFS, this is done with 
 
 ```
 export HADOOP_HEAPSIZE=32768
-yarn jar HalvadeUploaderWithLibs.jar -1 /scratch3/$USER/input_data/ERR194147_1.fastq.gz -2 /scratch3/$USER/input_data/ERR194147_2.fastq.gz -O /user/$USER/halvade/in/ -t 8
+hadoop jar HalvadeUploaderWithLibs.jar -1 /scratch3/$USER/input_data/ERR194147_1.fastq.gz -2 /scratch3/$USER/input_data/ERR194147_2.fastq.gz -O /user/$USER/halvade/in/ -t 8
 ```
 
 ** Step 2: Prepare reference data **
@@ -223,7 +223,7 @@ The input data needs to be preprocessed and stored onto HDFS, this is done with 
 
 ```
 export HADOOP_HEAPSIZE=16384
-hdfs jar HalvadeUploaderWithLibs.jar -1 /scratch3/$USER/input_data/ENCFF005NLJ.fastq.gz -2 /scratch3/$USER/input_data/ENCFF635CQM.fastq.gz -O /user/$USER/halvade/in/ -t 8
+hadoop jar HalvadeUploaderWithLibs.jar -1 /scratch3/$USER/input_data/ENCFF005NLJ.fastq.gz -2 /scratch3/$USER/input_data/ENCFF635CQM.fastq.gz -O /user/$USER/halvade/in/ -t 8
 ```
 
 
@@ -263,7 +263,7 @@ All reference data need to be uploaded onto HDFS:
 ```
 hdfs dfs -put references/ucsc.hg19.* /user/$USER/halvade/ref/
 hdfs dfs -put dbsnp/dbsnp_138.hg19.vcf* /user/$USER/halvade/ref/dbsnp/
-hdfs dfs -put STAR_ref /usr/$USER/halvade/ref/
+hdfs dfs -put STAR_ref /user/$USER/halvade/ref/
 ```
 
 ** Step 4: Configure Halvade **
